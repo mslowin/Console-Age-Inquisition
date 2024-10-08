@@ -1,5 +1,5 @@
 ﻿namespace ConsoleAgeInquisition.Models;
 
-internal class Enemy : Character
+public class Enemy : Character
 {
 }

@@ -1,6 +1,6 @@
 ﻿namespace ConsoleAgeInquisition.Models;
 
-internal class Room
+public class Room
 {
     public string RoomName;
 
@@ -18,4 +18,6 @@ internal class Room
     public int? RightDoorId;
 
     public Hero? Hero;
+
+    public Chest? Chest;
 }

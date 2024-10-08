@@ -25,7 +25,7 @@ namespace ConsoleAgeInquisition
                           \|__|             \|_________|
             ");
 
-            ViewsService.HandleMainMenu();
+            GameManagementService.Start();
 
             // Użytkownik zostanie powitany
             // Dostanie możliwość wyboru akcji, które będą wyświetlone w menu

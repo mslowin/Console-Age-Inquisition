@@ -1,6 +1,6 @@
 ﻿namespace ConsoleAgeInquisition.Models;
 
-internal class Game
+public class Game
 {
     public string DifficultyLevel { get; set; }
 

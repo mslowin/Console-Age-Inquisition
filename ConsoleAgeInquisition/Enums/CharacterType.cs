@@ -2,7 +2,6 @@
 
 public enum CharacterType
 {
-    None,
     Human,
     Elf,
     Dwarf,
