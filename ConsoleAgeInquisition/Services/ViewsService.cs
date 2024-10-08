@@ -17,13 +17,11 @@ public static class ViewsService
 
         if (choice == "1")
         {
-            // TODO: enum drzwi: frontDoor, LEftDoor, itd
             // TODO: enum poziomów trudności gry
             var game = HandleNewGameMenu();
+            game = HandleHeroCreationMenu(game);
             // TODO: ------------------------------------->
             // When game is ready, The character needs to be initialized and added to one of the rooms
-            // Consider adding separate fields for doors in a room like FirstDoorId and in the other Room the Ids
-            // would be the same so the code would now where the character went (what room)
         }
 
         ////return Console.ReadLine();
@@ -35,17 +33,20 @@ public static class ViewsService
         Console.WriteLine("1. Easy");
         Console.WriteLine("2. Medium");
         Console.WriteLine("3. Hard");
-
+        // TODO: Console.WriteLine("4. Return");
         var difficultyLevel = Console.ReadLine();
-        while (difficultyLevel != "1" && difficultyLevel != "2" && difficultyLevel != "3")
+        while (difficultyLevel != null
+            && difficultyLevel.Trim() != "1"
+            && difficultyLevel.Trim() != "2"
+            && difficultyLevel.Trim() != "3")
         {
             Console.WriteLine("Invalid difficulty level. Please choose 1, 2 or 3.");
             difficultyLevel = Console.ReadLine();
         }
 
         Console.WriteLine("Type a name for this game:");
+        // TODO: Console.WriteLine("Type "return" to go back");
         var saveName = Console.ReadLine();
-
         while (string.IsNullOrEmpty(saveName))
         {
             Console.WriteLine("Invalid save name. Please provide a valid name.");
@@ -53,8 +54,8 @@ public static class ViewsService
         }
 
         // TODO: jeśli gra łatwa: 6 pokoi, każdy pokój 1 przeciwnik (mało życia i ataku), 2 skrzynie, 1 boss (łatwy)
-        // ...
-        // ...
+        // TODO: jeśli gra średnia: ...
+        // TODO: jeśli gra trudna: ...
 
         // Constants for easy game mode
         var numOfEnemies = 6;
@@ -73,13 +74,37 @@ public static class ViewsService
         // Creating rooms for easy game mode
         for (var i = 0; i < numOfEnemies; i++)
         {
-            var room = CreateRoom(1, new List<Enemy> { enemies[i] });
+            var room = CreateRoomEasyMode(i, new List<Enemy> { enemies[i] });
             rooms.Add(room);
         }
 
         var dungeon = new Dungeon { Rooms = rooms };
 
+        Console.WriteLine("Game initialization finished. Time to create your hero...");
+        Console.WriteLine("");
+
         return new Game { DifficultyLevel = difficultyLevel, SaveName = saveName, World = dungeon };
+    }
+
+    private static Game HandleHeroCreationMenu(Game game)
+    {
+        // TODO: whole hero creation menu
+        var hero = new Hero();
+
+        Console.WriteLine("Type a name for the hero:");
+        var heroName = Console.ReadLine();
+        while (string.IsNullOrEmpty(heroName))
+        {
+            Console.WriteLine("Invalid name. Please provide a valid name.");
+            heroName = Console.ReadLine();
+        }
+        hero.Name = heroName;
+
+        // ...
+
+        game.World.Rooms[0].Hero = hero;
+
+        return game;
     }
 
     private static Item CreateItem(ItemType type, string name, int attackBuff, int healthBuff, int manaBuff)
@@ -108,17 +133,15 @@ public static class ViewsService
         };
     }
 
-    private static Room CreateRoom(int numOfDoors, List<Enemy> enemies)
+    /// Creates rooms with one middle door and one return door. The rooms are all in a row.
+    private static Room CreateRoomEasyMode(int iteration, List<Enemy> enemies)
     {
-        var doorsList = new List<int>();
-        for (int i = 1; i <= numOfDoors; i++)
-        {
-            doorsList.Add(i);
-        }
-
         return new Room
         {
-            Doors = doorsList,
+            RoomName = $"Room{iteration}",
+            MiddleDoorId = iteration,
+            ReturnDoorId = iteration - 1,
+            Doors = new List<int> { 1 },
             Enemies = enemies
         };
     }

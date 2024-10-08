@@ -8,4 +8,3 @@ internal class Game
 
     public Dungeon World { get; set; }
 }
-

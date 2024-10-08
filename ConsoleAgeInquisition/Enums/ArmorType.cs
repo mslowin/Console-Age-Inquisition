@@ -8,4 +8,3 @@ public enum ArmorType
     ArmsArmor,
     LegsArmor,
 }
-

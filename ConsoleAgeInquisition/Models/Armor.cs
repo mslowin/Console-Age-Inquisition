@@ -6,4 +6,3 @@ public class Armor : Item
 {
     public ArmorType ArmorType;
 }
-
