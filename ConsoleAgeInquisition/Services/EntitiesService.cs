@@ -11,7 +11,7 @@ public static class EntitiesService
     /// <summary>
     /// Creates a new instance of the Item class with the provided parameters.
     /// </summary>
-    /// <param name="type">The type of the item (e.g., Weapon, Armor, Consumable).</param>
+    /// <param name="type">The type of the item.</param>
     /// <param name="name">The name of the item.</param>
     /// <param name="attackBuff">The attack buff provided by the item.</param>
     /// <param name="healthBuff">The health buff provided by the item.</param>
@@ -37,7 +37,7 @@ public static class EntitiesService
     /// <param name="attack">The attack power of the enemy.</param>
     /// <param name="mana">The mana points of the enemy.</param>
     /// <param name="name">The name of the enemy.</param>
-    /// <param name="type">The type of the enemy (e.g., Warrior, Mage, Rogue).</param>
+    /// <param name="type">The type of the enemy.</param>
     /// <param name="weapon">The weapon the enemy is using.</param>
     /// <param name="items">A list of items the enemy is carrying.</param>
     /// <returns>A new Enemy instance with the provided parameters.</returns>
@@ -85,5 +85,42 @@ public static class EntitiesService
             Doors = new List<int> { 1 },
             Enemies = enemies
         };
+    }
+
+    /// <summary>
+    /// Creates a list of weak enemies.
+    /// </summary>
+    /// <param name="numOfEnemies">The number of enemies to create.</param>
+    /// <returns>A list of enemies.</returns>
+    public static List<Enemy> CreateWeakEnemies(int numOfEnemies)
+    {
+        var enemies = new List<Enemy>();
+        for (var i = 0; i < numOfEnemies; i++)
+        {
+            var enemy = CreateEnemy(100, 50, 0, $"Bob{i}", CharacterType.Goblin,
+                new Weapon { Type = ItemType.Weapon, AttackBuff = 2, Name = "Stick" },
+                new List<Item> { CreateItem(ItemType.PowerRing, "Ring of never ending happiness", 0, 5, 0) });
+            enemies.Add(enemy);
+        }
+
+        return enemies;
+    }
+
+    /// <summary>
+    /// Creates a list of simple rooms where every room has only one enemy.
+    /// </summary>
+    /// <param name="numOfRooms">The number of rooms to create.</param>
+    /// <param name="enemies">List of enemies (one enemy per room).</param>
+    /// <returns>A list of rooms.</returns>
+    public static List<Room> CreateSimpleRooms(int numOfRooms, List<Enemy> enemies)
+    {
+        var rooms = new List<Room>();
+        for (var i = 0; i < numOfRooms; i++)
+        {
+            var room = CreateRoomEasyMode(i, new List<Enemy> { enemies[i] });
+            rooms.Add(room);
+        }
+
+        return rooms;
     }
 }

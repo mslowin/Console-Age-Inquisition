@@ -1,4 +1,5 @@
 ﻿using ConsoleAgeInquisition.Enums;
+using ConsoleAgeInquisition.Models;
 
 namespace ConsoleAgeInquisition.Services;
 
@@ -6,7 +7,6 @@ public static class ViewsService
 {
     public static int HandleMainMenu()
     {
-        int choice;
         Console.WriteLine("Welcome to Console Age: Inquisition");
         Console.WriteLine("Please let me know what do you want me to do:");
         Console.WriteLine("1. Start a new game");
@@ -14,11 +14,11 @@ public static class ViewsService
         Console.WriteLine("3. Exit");
         while (true)
         {
-            if (int.TryParse(Console.ReadLine(), out choice))
+            if (int.TryParse(Console.ReadLine(), out var choice))
             {
                 if (choice is 1 or 2 or 3)
                 {
-                    break;
+                    return choice;
                 }
 
                 Console.WriteLine("Invalid choice. Please select 1, 2, or 3.");
@@ -26,52 +26,79 @@ public static class ViewsService
 
             Console.WriteLine("Invalid input. Please enter a number.");
         }
-
-        return choice;
     }
 
     public static string HandleDifficultyLevelMenu()
     {
-        string? difficultyLevel;
+        var index = 1;
         Console.WriteLine("Select difficulty level for the game:");
-        Console.WriteLine("1. Easy");
-        Console.WriteLine("2. Medium");
-        Console.WriteLine("3. Hard");
+        foreach (var type in Enum.GetValues(typeof(DifficultyLevel)))
+        {
+            Console.WriteLine($"{index}. {type}");
+            index++;
+        }
+
         while (true)
         {
-            difficultyLevel = Console.ReadLine();
-            if (difficultyLevel != null
-                && difficultyLevel.Length > 0
-                && difficultyLevel is "1" or "2" or "3")
+            var difficultyLevel = Console.ReadLine();
+            if (int.TryParse(difficultyLevel, out var difficultyLevelInt)
+                && difficultyLevelInt >= 1
+                && difficultyLevelInt <= Enum.GetValues(typeof(DifficultyLevel)).Length)
             {
-                break;
+                return ((DifficultyLevel)(difficultyLevelInt - 1)).ToString();
             }
 
             Console.WriteLine("Invalid difficulty level. Please choose 1, 2, or 3.");
         }
-
-        return difficultyLevel;
     }
 
     public static string HandleHeroTypeMenu()
     {
-        string? heroType;
-        Console.WriteLine("Chose Character Type:");
+        var index = 1;
+        Console.WriteLine("Choose Character Type:");
         foreach (var type in Enum.GetValues(typeof(CharacterType)))
         {
-            Console.WriteLine($"{(int)type}. {type}");
+            Console.WriteLine($"{index}. {type}");
+            index++;
         }
+
         while (true)
         {
-            heroType = Console.ReadLine();
-            if (int.TryParse(heroType, out var heroTypeInt) && Enum.IsDefined(typeof(CharacterType), heroTypeInt))
+            var heroType = Console.ReadLine();
+            if (int.TryParse(heroType, out var heroTypeInt)
+                && heroTypeInt >= 1
+                && heroTypeInt <= Enum.GetValues(typeof(CharacterType)).Length)
             {
-                break;
+                return ((CharacterType)(heroTypeInt - 1)).ToString();
             }
 
             Console.WriteLine("Invalid type. Please provide a valid type.");
         }
+    }
 
-        return heroType;
+    public static string HandleHeroNameSelection()
+    {
+        Console.WriteLine("Type a name for the hero:");
+        var heroName = Console.ReadLine();
+        while (string.IsNullOrWhiteSpace(heroName))
+        {
+            Console.WriteLine("Invalid name. Please provide a valid name.");
+            heroName = Console.ReadLine();
+        }
+
+        return heroName;
+    }
+
+    public static string HandleGameNameSelection()
+    {
+        Console.WriteLine("Type a name for this game:");
+        var saveName = Console.ReadLine();
+        while (string.IsNullOrWhiteSpace(saveName))
+        {
+            Console.WriteLine("Invalid save name. Please provide a valid name.");
+            saveName = Console.ReadLine();
+        }
+
+        return saveName;
     }
 }

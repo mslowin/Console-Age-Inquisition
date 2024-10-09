@@ -1,8 +1,10 @@
-﻿namespace ConsoleAgeInquisition.Models;
+﻿using ConsoleAgeInquisition.Enums;
+
+namespace ConsoleAgeInquisition.Models;
 
 public class Game
 {
-    public string DifficultyLevel { get; set; }
+    public DifficultyLevel DifficultyLevel { get; set; }
 
     public string SaveName { get; set; }
 

@@ -17,7 +17,6 @@ public static class GameManagementService
 
         if (choice == 1)
         {
-            // TODO: enum poziomów trudności gry
             var game = CreateNewGame();
             game.World.Rooms[0].Hero = CreateHero();
 
@@ -26,7 +25,7 @@ public static class GameManagementService
 
         if (choice == 2)
         {
-            // Wczytywanie
+            // TODO: wczytywanie gry, ale wcześniej zapisywanie jej
         }
     }
 
@@ -34,13 +33,7 @@ public static class GameManagementService
     {
         var difficultyLevel = ViewsService.HandleDifficultyLevelMenu();
 
-        Console.WriteLine("Type a name for this game:");
-        var saveName = Console.ReadLine();
-        while (string.IsNullOrWhiteSpace(saveName))
-        {
-            Console.WriteLine("Invalid save name. Please provide a valid name.");
-            saveName = Console.ReadLine();
-        }
+        var saveName = ViewsService.HandleGameNameSelection();
 
         // TODO: switch na poziom trudności
         // TODO: jeśli gra łatwa: 6 pokoi, każdy pokój 1 przeciwnik (mało życia i ataku), 2 skrzynie, 1 boss (łatwy)
@@ -49,49 +42,32 @@ public static class GameManagementService
 
         // Constants for easy game mode
         var numOfEnemies = 6;
-        var enemies = new List<Enemy>();
-        var rooms = new List<Room>();
+        var numOfRooms = 6;
 
         // Creating enemies for easy game mode
-        for (var i = 0; i < numOfEnemies; i++)
-        {
-            var enemy = EntitiesService.CreateEnemy(100, 50, 0, $"Bob{i}", CharacterType.Goblin,
-                new Weapon { Type = ItemType.Weapon, AttackBuff = 2, Name = "Stick" },
-                new List<Item> { EntitiesService.CreateItem(ItemType.PowerRing, "Ring of never ending happiness", 0, 5, 0) });
-            enemies.Add(enemy);
-        }
+        var enemies = EntitiesService.CreateWeakEnemies(numOfEnemies);
 
         // Creating rooms for easy game mode
-        for (var i = 0; i < numOfEnemies; i++)
-        {
-            var room = EntitiesService.CreateRoomEasyMode(i, new List<Enemy> { enemies[i] });
-            rooms.Add(room);
-        }
+        var rooms = EntitiesService.CreateSimpleRooms(numOfRooms, enemies);
 
         var dungeon = new Dungeon { Rooms = rooms };
 
         Console.WriteLine("");
         Console.WriteLine("Game initialization finished. Time to create your hero...");
 
-        return new Game { DifficultyLevel = difficultyLevel, SaveName = saveName, World = dungeon };
+        return new Game
+        {
+            DifficultyLevel = (DifficultyLevel)Enum.Parse(typeof(DifficultyLevel), difficultyLevel),
+            SaveName = saveName,
+            World = dungeon
+        };
     }
 
     public static Hero CreateHero()
     {
-        var hero = new Hero();
+        Hero hero = new();
 
-        #region HeroName
-
-        Console.WriteLine("Type a name for the hero:");
-        var heroName = Console.ReadLine();
-        while (string.IsNullOrWhiteSpace(heroName))
-        {
-            Console.WriteLine("Invalid name. Please provide a valid name.");
-            heroName = Console.ReadLine();
-        }
-        hero.Name = heroName;
-
-        #endregion HeroName
+        hero.Name = ViewsService.HandleHeroNameSelection();
 
         var heroType = ViewsService.HandleHeroTypeMenu();
         hero.Type = (CharacterType)Enum.Parse(typeof(CharacterType), heroType);
