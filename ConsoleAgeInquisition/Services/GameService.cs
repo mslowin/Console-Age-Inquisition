@@ -1,4 +1,5 @@
-﻿using ConsoleAgeInquisition.Models;
+﻿using ConsoleAgeInquisition.Commands;
+using ConsoleAgeInquisition.Models;
 
 namespace ConsoleAgeInquisition.Services;
 
@@ -9,19 +10,40 @@ public static class GameService
 {
     public static void Run(Game game)
     {
+        var commandService = new CommandService();
+        Initialize(commandService, game.Dungeon);
+
+        ViewsService.IntroducePlayer();
+
+        while (true)
+        {
+            Console.Write("\n> ");
+            var input = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(input))
+            {
+                commandService.ExecuteCommand(input);
+            }
+        }
+
         // TODO: ZAPISYWANIE GRY!
+        // TODO: komenda do zapisania gry
 
-        // TODO: cały system gry. Czyli na początku jakiś tekst, że jesteś explorerem i
-        // TODO: znalazłeś kolejny dungeon i trzeba go przejść, żeby znaleźć wszystkie fanty.
+        // TODO: komenda do wyjścia z gry
 
-        // TODO: wylistowanie wszystkiego co jest w Roomie w stylu: znajdujesz się w pokoju z przeciwniekiem
-        // TODO: (goblinem czy coś), skrzynią i jednymi drzwiami frontowymi (np.)
+        // TODO: komenda examine, żeby np uzyskać informacji więcej o przeciwniku
 
         // TODO: ważne, nie można przejść do następenego pokoju, jeśli w pokoju są przeciwnicy, można jedynie wrócić do poprzedniego
 
-        // TODO: ważne, nie można otworzyćskrzyni, jeśli w pokoju są przeciwnicy
+        // TODO: ważne, nie można otworzyć skrzyni, jeśli w pokoju są przeciwnicy
+    }
 
-        // TODO: Napisanie coś w stylu: Type: help - i wylistowanie wszystkich możliwych akcji
+    private static void Initialize(CommandService commandService, Dungeon dungeon)
+    {
+        commandService.RegisterCommand("attack", new AttackCommand(dungeon), "Attack a specified target. Usage: attack [target]");
+        commandService.RegisterCommand("pickup", new PickUpCommand(), "Pick up an item. Usage: pickup [item]");
+        commandService.RegisterCommand("look", new LookCommand(dungeon), "Get information about the current surroundings.");
+        commandService.RegisterCommand("help", new HelpCommand(commandService), "List all available commands.");
+
+        // Potem reszta komend
     }
 }
-

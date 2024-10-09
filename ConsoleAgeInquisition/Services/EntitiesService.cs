@@ -82,7 +82,6 @@ public static class EntitiesService
             RoomName = $"Room{iteration}",
             MiddleDoorId = iteration,
             ReturnDoorId = iteration - 1,
-            Doors = new List<int> { 1 },
             Enemies = enemies
         };
     }

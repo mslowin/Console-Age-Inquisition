@@ -18,7 +18,7 @@ public static class GameManagementService
         if (choice == 1)
         {
             var game = CreateNewGame();
-            game.World.Rooms[0].Hero = CreateHero();
+            game.Dungeon.Rooms[0].Hero = CreateHero();
 
             GameService.Run(game);
         }
@@ -59,7 +59,7 @@ public static class GameManagementService
         {
             DifficultyLevel = (DifficultyLevel)Enum.Parse(typeof(DifficultyLevel), difficultyLevel),
             SaveName = saveName,
-            World = dungeon
+            Dungeon = dungeon
         };
     }
 

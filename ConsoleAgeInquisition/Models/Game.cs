@@ -8,5 +8,5 @@ public class Game
 
     public string SaveName { get; set; }
 
-    public Dungeon World { get; set; }
+    public Dungeon Dungeon { get; set; }
 }

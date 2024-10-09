@@ -6,9 +6,6 @@ public class Room
 
     public List<Enemy> Enemies;
 
-    /// Prawdopodobnie to będzie niepotrzebne, ewentualnie zamienić poszczególne drzwi poniżej na jkieś dictionary czy coś
-    public List<int> Doors;
-
     public int? LeftDoorId;
 
     public int? MiddleDoorId;

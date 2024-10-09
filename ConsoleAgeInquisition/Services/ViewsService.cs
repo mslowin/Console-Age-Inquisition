@@ -1,5 +1,4 @@
 ﻿using ConsoleAgeInquisition.Enums;
-using ConsoleAgeInquisition.Models;
 
 namespace ConsoleAgeInquisition.Services;
 
@@ -55,7 +54,7 @@ public static class ViewsService
     public static string HandleHeroTypeMenu()
     {
         var index = 1;
-        Console.WriteLine("Choose Character Type:");
+        Console.WriteLine("Choose character type:");
         foreach (var type in Enum.GetValues(typeof(CharacterType)))
         {
             Console.WriteLine($"{index}. {type}");
@@ -100,5 +99,19 @@ public static class ViewsService
         }
 
         return saveName;
+    }
+
+    public static void IntroducePlayer()
+    {
+        Console.Write("\n\n\nWelcome, Brave Explorer!");
+        Console.Write("\n\nAs the sun sets behind the towering peaks of the Eldar Mountains, casting long shadows " +
+                      "across the land, you find yourself standing before the ominous entrance of an ancient dungeon. " +
+                      "The cool evening breeze carries with it whispers of forgotten tales and hidden treasures " +
+                      "waiting to be uncovered.");
+        Console.Write("\n\nMany have already died inside these tombs, but you, however, are driven by more than " +
+                      "just the thrill of discovery. Your heart beats with the hope of impressing the ladies.");
+        Console.Write("\n\nPrepare yourself, brave soul! Enter the dungeon, claim your treasures, and win the " +
+                      "admiration of the fairest ladies! Your adventure begins now!\n\n");
+        Console.Write("Type \"look\" to gather information about your surroundings or \"help\" to list all available commands");
     }
 }
