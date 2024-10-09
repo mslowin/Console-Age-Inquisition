@@ -25,9 +25,6 @@ public static class GameService
             }
         }
 
-        // TODO: ZAPISYWANIE GRY!
-        // TODO: komenda do zapisania gry
-
         // TODO: komenda do wyjścia z gry
 
         // TODO: komenda examine, żeby np uzyskać informacji więcej o przeciwniku
@@ -40,10 +37,12 @@ public static class GameService
     private static void Initialize(CommandService commandService, Game game)
     {
         commandService.RegisterCommand("attack", new AttackCommand(game.Dungeon), "Attack a specified target. Usage: attack [target]");
-        commandService.RegisterCommand("pickup", new PickUpCommand(), "Pick up an item. Usage: pickup [item]");
+        commandService.RegisterCommand("pickup", new PickUpCommand(game.Dungeon), "Pick up an item. Usage: pickup [item]");
         commandService.RegisterCommand("save", new SaveCommand(game), "Saves current state of the game.");
         commandService.RegisterCommand("look", new LookCommand(game.Dungeon), "Get information about the current surroundings.");
         commandService.RegisterCommand("help", new HelpCommand(commandService), "List all available commands.");
+        commandService.RegisterCommand("restart", new RestartCommand(game), "Restart the game with optional saving.");
+        commandService.RegisterCommand("exit", new ExitCommand(game), "Exit the game with optional saving.");
 
         // Potem reszta komend
     }

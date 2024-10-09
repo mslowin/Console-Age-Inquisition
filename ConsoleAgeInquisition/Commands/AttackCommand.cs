@@ -42,6 +42,48 @@ public class AttackCommand : ICommand
         {
             Console.WriteLine($"{enemy.Name} is dead!");
             currentRoom.Enemies.Remove(enemy);
+
+            //TODO: do zastanowienia czy nie lepiej, żeby przeciwnik po zabiciu
+            //TODO: dropił skrzynie jedną z tymi rzeczami
+            //TODO: wtedy w komendzie look byłoby ładniej, bo po prostu byłyby skrzynie
+
+            // Droping enemy items on the floor
+            var itemsDropped = 0;
+            if (enemy.Weapon != null)
+            {
+                currentRoom.ItemsOnTheFloor.Add(enemy.Weapon);
+                itemsDropped++;
+            }
+            if (enemy.Items != null)
+            {
+                currentRoom.ItemsOnTheFloor.AddRange(enemy.Items);
+                itemsDropped++;
+            }
+            if (enemy.HeadArmor != null)
+            {
+                currentRoom.ItemsOnTheFloor.Add(enemy.HeadArmor);
+                itemsDropped++;
+            }
+            if (enemy.ChestArmor != null)
+            {
+                currentRoom.ItemsOnTheFloor.Add(enemy.ChestArmor);
+                itemsDropped++;
+            }
+            if (enemy.LegsArmor != null)
+            {
+                currentRoom.ItemsOnTheFloor.Add(enemy.LegsArmor);
+                itemsDropped++;
+            }
+            if (enemy.ArmsArmor != null)
+            {
+                currentRoom.ItemsOnTheFloor.Add(enemy.ArmsArmor);
+                itemsDropped++;
+            }
+
+            if (itemsDropped > 0)
+            {
+                Console.WriteLine($"{enemy.Name} dropped his items! (use \"look\" command)");
+            }
         }
         else
         {

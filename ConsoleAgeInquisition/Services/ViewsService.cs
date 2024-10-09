@@ -27,6 +27,38 @@ public static class ViewsService
         }
     }
 
+    public static int HandleSaveAndExitMenu()
+    {
+        Console.WriteLine("Do you want to save current game state before exiting?");
+        return HandleYesNoMenu();
+    }
+
+    public static int HandleSaveAndRestartMenu()
+    {
+        Console.WriteLine("Do you want to save current game state before restarting?");
+        return HandleYesNoMenu();
+    }
+
+    private static int HandleYesNoMenu()
+    {
+        Console.WriteLine("1. Yes");
+        Console.WriteLine("2. No");
+        while (true)
+        {
+            if (int.TryParse(Console.ReadLine(), out var choice))
+            {
+                if (choice is 1 or 2)
+                {
+                    return choice;
+                }
+
+                Console.WriteLine("Invalid choice. Please select 1 or 2.");
+            }
+
+            Console.WriteLine("Invalid input. Please enter a number.");
+        }
+    }
+
     public static string HandleDifficultyLevelMenu()
     {
         var index = 1;
@@ -99,6 +131,46 @@ public static class ViewsService
         }
 
         return saveName;
+    }
+
+    public static string? HandleLoadGameMenu()
+    {
+        var gameSavesFolderPath = Resources.GetGameSavesFolderPath();
+
+        if (!Directory.Exists(gameSavesFolderPath))
+        {
+            Console.WriteLine("No saved games to be loaded.");
+            return null;
+        }
+
+        var saveFiles = Directory.GetFiles(gameSavesFolderPath, "*.json");
+
+        if (saveFiles.Length == 0)
+        {
+            Console.WriteLine("No saved games to be loaded.");
+            return null;
+        }
+
+        var index = 1;
+        Console.WriteLine("Select save to be loaded:");
+        foreach (var save in saveFiles)
+        {
+            Console.WriteLine($"{index}. {Path.GetFileName(save)}");
+            index++;
+        }
+
+        while (true)
+        {
+            var selectedSave = Console.ReadLine();
+            if (int.TryParse(selectedSave, out var selectedSaveInt)
+                && selectedSaveInt >= 1
+                && selectedSaveInt <= saveFiles.Length)
+            {
+                return saveFiles[selectedSaveInt - 1];
+            }
+
+            Console.WriteLine("Invalid save. Please provide a valid number.");
+        }
     }
 
     public static void IntroducePlayer()

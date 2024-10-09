@@ -1,5 +1,6 @@
 ﻿using ConsoleAgeInquisition.Enums;
 using ConsoleAgeInquisition.Models;
+using Newtonsoft.Json;
 
 namespace ConsoleAgeInquisition.Services;
 
@@ -13,19 +14,42 @@ public static class GameManagementService
     /// </summary>
     public static void Start()
     {
-        var choice = ViewsService.HandleMainMenu();
-
-        if (choice == 1)
+        while (true)
         {
-            var game = CreateNewGame();
-            game.Dungeon.Rooms[0].Hero = CreateHero();
+            var choice = ViewsService.HandleMainMenu();
 
-            GameService.Run(game);
-        }
+            if (choice == 1)
+            {
+                // New game
+                var game = CreateNewGame();
+                game.Dungeon.Rooms[0].Hero = CreateHero();
 
-        if (choice == 2)
-        {
-            // TODO: wczytywanie gry, ale wcześniej zapisywanie jej
+                GameService.Run(game);
+
+                return;
+            }
+
+            if (choice == 2)
+            {
+                // Loading game
+                var game = FilesService.LoadGame();
+                if (game == null)
+                {
+                    continue;
+                }
+
+                GameService.Run(game);
+
+                return;
+            }
+
+            if (choice == 3)
+            {
+                // Exiting the game
+                return;
+            }
+
+            return;
         }
     }
 
@@ -63,7 +87,7 @@ public static class GameManagementService
         };
     }
 
-    public static Hero CreateHero()
+    private static Hero CreateHero()
     {
         Hero hero = new();
 

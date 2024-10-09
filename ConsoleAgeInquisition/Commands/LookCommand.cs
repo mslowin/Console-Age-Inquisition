@@ -1,4 +1,5 @@
 ﻿using ConsoleAgeInquisition.Models;
+using System;
 
 namespace ConsoleAgeInquisition.Commands;
 
@@ -15,14 +16,12 @@ public class LookCommand : ICommand
     {
         // The room where the hero is
         var currentRoom = _dungeon.Rooms.Find(room => room.Hero != null);
-
         Console.WriteLine($"You are now in: {currentRoom.RoomName}\n");
 
         // Showing enemies
         if (currentRoom.Enemies.Count > 0)
         {
             Console.WriteLine("Enemies in the room:");
-
             foreach (var enemy in currentRoom.Enemies)
             {
                 Console.WriteLine($"- {enemy.Type} {enemy.Name} (HP: {enemy.Health})");
@@ -53,6 +52,20 @@ public class LookCommand : ICommand
         else
         {
             Console.WriteLine("\nNo chest in the room.");
+        }
+
+        // Showing items on the floor
+        if (currentRoom.ItemsOnTheFloor.Count > 0)
+        {
+            Console.WriteLine("\nItems on the floor:");
+            foreach (var item in currentRoom.ItemsOnTheFloor)
+            {
+                Console.WriteLine($"- {item.Name} (Type: {item.Type})");
+            }
+        }
+        else
+        {
+            Console.WriteLine("\nNo items on the floor.");
         }
 
         // Showing doors

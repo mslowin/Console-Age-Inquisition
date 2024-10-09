@@ -73,7 +73,7 @@ public static class EntitiesService
 
         if (iteration == 5)
         {
-            chest = new Chest { Items = new List<Item> { new Armor { HealthBuff = 10, Name = "Helmet of undying", ArmorType = ArmorType.Helmet } } };
+            chest = new Chest { Items = new List<Item> { new Armor { HealthBuff = 10, Name = "HelmetOfUndying", ArmorType = ArmorType.Helmet } } };
         }
 
         return new Room
@@ -82,7 +82,8 @@ public static class EntitiesService
             RoomName = $"Room{iteration}",
             MiddleDoorId = iteration,
             ReturnDoorId = iteration - 1,
-            Enemies = enemies
+            Enemies = enemies,
+            ItemsOnTheFloor = new List<Item>()
         };
     }
 
@@ -98,7 +99,11 @@ public static class EntitiesService
         {
             var enemy = CreateEnemy(100, 50, 0, $"Bob{i}", CharacterType.Goblin,
                 new Weapon { Type = ItemType.Weapon, AttackBuff = 2, Name = "Stick" },
-                new List<Item> { CreateItem(ItemType.PowerRing, "Ring of never ending happiness", 0, 5, 0) });
+                new List<Item>
+                {
+                    CreateItem(ItemType.PowerRing, "RingOfPower", 0, 5, 0),
+                    new Weapon { Type = ItemType.Weapon, AttackBuff = 4, Name = "BigStick" }
+                });
             enemies.Add(enemy);
         }
 

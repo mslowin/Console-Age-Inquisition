@@ -1,15 +1,46 @@
-﻿namespace ConsoleAgeInquisition.Commands;
+﻿using ConsoleAgeInquisition.Models;
+
+namespace ConsoleAgeInquisition.Commands;
 
 public class PickUpCommand : ICommand
 {
+    private readonly Dungeon _dungeon;
+
+    public PickUpCommand(Dungeon dungeon)
+    {
+        _dungeon = dungeon;
+    }
+
     public void Execute(string[] args)
     {
-        string item = args.Length > 0 ? args[0] : "unknown item";
-        Console.WriteLine($"Picking up {item}...");
+        var currentRoom = _dungeon.Rooms.Find(room => room.Hero != null);
 
-        // TODO: Reszta logiki do podnoszenia
-        // trzeba będzie znaleźć item z taką nazwą co jest w item
-        // Trzeba będzie też chyba przekazać w ogóle obiekt Room, który w sobie ma wszystko (Hero, Enemies, Items)
-        // Trzeba będzie też przekazać obiekt Hero chyba (który może mieć w sobie metodę PickUp)
+        if (args.Length == 0)
+        {
+            Console.WriteLine("Specify the item to pick up.");
+            return;
+        }
+
+        var itemName = args[0];
+
+        var item = currentRoom.ItemsOnTheFloor.Find(e => e.Name == itemName);
+
+        if (item == null)
+        {
+            Console.WriteLine("No such item to pick up.");
+            return;
+        }
+
+        // Picking up an item (removing it from ItemsOnTheFloor)
+        currentRoom.ItemsOnTheFloor.Remove(item);
+        var unequippedItem = currentRoom.Hero.PickUpItem(item);
+        Console.WriteLine($"You picked up {item.Name}!");
+
+        if (unequippedItem != null)
+        {
+            // When an old item is being unequipped, then it needs to go on the floor
+            currentRoom.ItemsOnTheFloor.Add(unequippedItem);
+            Console.WriteLine($"You unequipped {unequippedItem.Name}!");
+        }
     }
 }
