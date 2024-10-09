@@ -11,7 +11,7 @@ public static class GameService
     public static void Run(Game game)
     {
         var commandService = new CommandService();
-        Initialize(commandService, game.Dungeon);
+        Initialize(commandService, game);
 
         ViewsService.IntroducePlayer();
 
@@ -37,11 +37,12 @@ public static class GameService
         // TODO: ważne, nie można otworzyć skrzyni, jeśli w pokoju są przeciwnicy
     }
 
-    private static void Initialize(CommandService commandService, Dungeon dungeon)
+    private static void Initialize(CommandService commandService, Game game)
     {
-        commandService.RegisterCommand("attack", new AttackCommand(dungeon), "Attack a specified target. Usage: attack [target]");
+        commandService.RegisterCommand("attack", new AttackCommand(game.Dungeon), "Attack a specified target. Usage: attack [target]");
         commandService.RegisterCommand("pickup", new PickUpCommand(), "Pick up an item. Usage: pickup [item]");
-        commandService.RegisterCommand("look", new LookCommand(dungeon), "Get information about the current surroundings.");
+        commandService.RegisterCommand("save", new SaveCommand(game), "Saves current state of the game.");
+        commandService.RegisterCommand("look", new LookCommand(game.Dungeon), "Get information about the current surroundings.");
         commandService.RegisterCommand("help", new HelpCommand(commandService), "List all available commands.");
 
         // Potem reszta komend

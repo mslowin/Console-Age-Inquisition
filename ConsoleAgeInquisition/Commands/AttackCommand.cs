@@ -17,6 +17,13 @@ public class AttackCommand : ICommand
         ////Console.WriteLine($"Attacking {target}...");
 
         var currentRoom = _dungeon.Rooms.Find(room => room.Hero != null);
+
+        if (args.Length == 0)
+        {
+            Console.WriteLine("Specify the enemy to attack.");
+            return;
+        }
+
         var enemyName = args[0];
 
         var enemy = currentRoom.Enemies.Find(e => e.Name == enemyName);
