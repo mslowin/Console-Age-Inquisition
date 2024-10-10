@@ -65,11 +65,15 @@ public static class GameManagementService
         // TODO: jeśli gra trudna: ...
 
         // Constants for easy game mode
-        var numOfEnemies = 6;
+        var numOfEnemies = 5;
         var numOfRooms = 6;
 
         // Creating enemies for easy game mode
         var enemies = EntitiesService.CreateWeakEnemies(numOfEnemies);
+
+        // Creating a boss for easy game mode
+        var boss = EntitiesService.CreateWeakBoss("GoblinKing");
+        enemies.Add(boss);
 
         // Creating rooms for easy game mode
         var rooms = EntitiesService.CreateSimpleRooms(numOfRooms, enemies);

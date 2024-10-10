@@ -25,7 +25,7 @@ public static class GameService
             }
         }
 
-        // TODO: komenda do wyjścia z gry
+        // TODO: po pokonaniu bossa konie gry i jakiś tekst podsumowujący
 
         // TODO: komenda examine, żeby np uzyskać informacji więcej o przeciwniku
 

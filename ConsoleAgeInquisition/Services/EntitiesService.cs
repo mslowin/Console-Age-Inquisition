@@ -97,17 +97,34 @@ public static class EntitiesService
         var enemies = new List<Enemy>();
         for (var i = 0; i < numOfEnemies; i++)
         {
-            var enemy = CreateEnemy(100, 50, 0, $"Bob{i}", CharacterType.Goblin,
+            var enemy = CreateEnemy(100, 5, 0, $"Bob{i}", CharacterType.Goblin,
                 new Weapon { Type = ItemType.Weapon, AttackBuff = 2, Name = "Stick" },
                 new List<Item>
                 {
-                    CreateItem(ItemType.PowerRing, "RingOfPower", 0, 5, 0),
-                    new Weapon { Type = ItemType.Weapon, AttackBuff = 4, Name = "BigStick" }
+                    CreateItem(ItemType.PowerRing, "RingOfPower", 0, 5, 0)
                 });
             enemies.Add(enemy);
         }
 
         return enemies;
+    }
+
+    /// <summary>
+    /// Creates a weak boss for easy game mode.
+    /// </summary>
+    /// <param name="name">Name of the boss.</param>
+    /// <returns>A list of enemies.</returns>
+    public static Enemy CreateWeakBoss(string name)
+    {
+            var enemy = CreateEnemy(200, 10, 0, name, CharacterType.Goblin,
+                new Weapon { Type = ItemType.Weapon, AttackBuff = 5, Name = "GiantStick" },
+                new List<Item>
+                {
+                    CreateItem(ItemType.PowerRing, "RingOfHappiness", 0, 5, 5),
+                    CreateItem(ItemType.QuestItem, "DiamondOre", 0, 0, 0)
+                });
+
+        return enemy;
     }
 
     /// <summary>
