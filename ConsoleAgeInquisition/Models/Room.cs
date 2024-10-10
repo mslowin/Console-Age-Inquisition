@@ -16,7 +16,7 @@ public class Room
 
     public Hero? Hero;
 
-    public Chest? Chest;
+    public List<Chest> Chests;
 
     public List<Item> ItemsOnTheFloor;
 }

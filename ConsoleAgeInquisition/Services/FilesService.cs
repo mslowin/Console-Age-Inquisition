@@ -1,6 +1,6 @@
 ﻿using ConsoleAgeInquisition.Models;
 using Newtonsoft.Json;
-using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace ConsoleAgeInquisition.Services;
 
@@ -9,11 +9,16 @@ public static class FilesService
     /// <summary>
     /// Saves the game in as a json file.
     /// </summary>
-    /// <param name="game">Game objeect to be saved.</param>
+    /// <param name="game">Game object to be saved.</param>
     /// <param name="saveName">Name of the save, e.g. "save1".</param>
-    /// <returns>True if the game has been sucessfully saved, otherwise false.</returns>
+    /// <returns>True if the game has been successfully saved, otherwise false.</returns>
     public static bool SaveGame(Game game, string saveName)
     {
+        if (!IsSaveNameValid(saveName))
+        {
+            Console.WriteLine("Invalid save name. The name needs to contain only letters and numbers (must start with a letter)");
+        }
+
         var gameSavesFolderPath = Resources.GetGameSavesFolderPath();
 
         // Kiedyś może przenieść savy do AppData folder
@@ -67,13 +72,9 @@ public static class FilesService
         return JsonConvert.DeserializeObject<Game>(jsonData);
     }
 
-    ////public bool CheckIfSaveFileAlreadyExists(string saveFilePath)
-    ////{
-    ////    if (File.Exists(saveFilePath))
-    ////    {
-    ////        return true;
-    ////    }
-
-    ////    return false;
-    ////}
+    private static bool IsSaveNameValid(string saveName)
+    {
+        var regex = new Regex("^[A-Za-z][A-Za-z0-9]*$");
+        return regex.IsMatch(saveName);
+    }
 }

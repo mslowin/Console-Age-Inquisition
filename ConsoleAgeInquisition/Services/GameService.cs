@@ -25,21 +25,26 @@ public static class GameService
             }
         }
 
-        // TODO: po pokonaniu bossa konie gry i jakiś tekst podsumowujący
+        // TODO: po pokonaniu bossa koniec gry i jakiś tekst podsumowujący (A właściwie gra powinna się
+        // TODO: kończyć w momencie kiedy w ekwipunku HEro znajdzie się np. diament, który wypada z bosa)
+        // TODO: czyli co iteracja jest jakis if (HeroFoundDiamond)
 
-        // TODO: komenda examine, żeby np uzyskać informacji więcej o przeciwniku
-
-        // TODO: ważne, nie można przejść do następenego pokoju, jeśli w pokoju są przeciwnicy, można jedynie wrócić do poprzedniego
+        // TODO: ważne, nie można przejść do następenego pokoju, jeśli w pokoju są przeciwnicy,
+        // TODO: można jedynie wrócić do poprzedniego (to do komendy go/move czy coś)
 
         // TODO: ważne, nie można otworzyć skrzyni, jeśli w pokoju są przeciwnicy
+        // TODO: (komenda open, która wysypuje zawartość skrzyni na ziemie i usuwa skrzynie z pokoju)
+
+        // TODO: nazwy objektów nigdy nie mogą się powtarzać wewnątrz jednego pokoju
     }
 
     private static void Initialize(CommandService commandService, Game game)
     {
         commandService.RegisterCommand("attack", new AttackCommand(game.Dungeon), "Attack a specified target. Usage: attack [target]");
         commandService.RegisterCommand("pickup", new PickUpCommand(game.Dungeon), "Pick up an item. Usage: pickup [item]");
-        commandService.RegisterCommand("save", new SaveCommand(game), "Saves current state of the game.");
+        commandService.RegisterCommand("save", new SaveCommand(game), "Save current state of the game.");
         commandService.RegisterCommand("look", new LookCommand(game.Dungeon), "Get information about the current surroundings.");
+        commandService.RegisterCommand("examine", new ExamineCommand(game.Dungeon), "Get more information about an object or enemy. Usage: examine [object]");
         commandService.RegisterCommand("help", new HelpCommand(commandService), "List all available commands.");
         commandService.RegisterCommand("restart", new RestartCommand(game), "Restart the game with optional saving.");
         commandService.RegisterCommand("exit", new ExitCommand(game), "Exit the game with optional saving.");

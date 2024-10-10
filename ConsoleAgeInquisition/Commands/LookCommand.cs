@@ -25,18 +25,6 @@ public class LookCommand : ICommand
             foreach (var enemy in currentRoom.Enemies)
             {
                 Console.WriteLine($"- {enemy.Type} {enemy.Name} (HP: {enemy.Health})");
-
-                // TODO: To będzie do examine, albo do wchodzenia w tryb atakowania, czy coś:
-                ////Console.WriteLine($"- {enemy.Name} (HP: {enemy.Health}, ATT: {enemy.Attack}, MANA: {enemy.Mana})");
-                ////if (enemy.Weapon != null)
-                ////{
-                ////    Console.WriteLine($"    * Weapon: {enemy.Weapon}");
-                ////}
-                ////if (enemy.ChestArmor != null || enemy.HeadArmor != null || enemy.ArmsArmor != null ||
-                ////    enemy.LegsArmor != null)
-                ////{
-                ////}
-                ////Console.WriteLine($"    * Items: {enemy.Weapon}");
             }
         }
         else
@@ -45,13 +33,17 @@ public class LookCommand : ICommand
         }
 
         // Showing chests
-        if (currentRoom.Chest != null)
+        if (currentRoom.Chests.Count > 0)
         {
-            Console.WriteLine($"\nThere is a chest here. It contains: {currentRoom.Chest.Items}");
+            Console.WriteLine("\nChests in the room:");
+            foreach (var item in currentRoom.Chests)
+            {
+                Console.WriteLine($"- {item.Name}");
+            }
         }
         else
         {
-            Console.WriteLine("\nNo chest in the room.");
+            Console.WriteLine("\nNo chests in the room.");
         }
 
         // Showing items on the floor

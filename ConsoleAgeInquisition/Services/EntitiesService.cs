@@ -64,21 +64,27 @@ public static class EntitiesService
     /// <returns></returns>
     public static Room CreateRoomEasyMode(int iteration, List<Enemy> enemies)
     {
+        var chests = new List<Chest>();
         Chest? chest = null;
 
-        if (iteration == 2)
+        if (iteration == 0)
         {
-            chest = new Chest { Items = new List<Item> { new Weapon { AttackBuff = 10, Name = "Razor" } } };
+            chest = new Chest { Name = "Chest1", Items = new List<Item> { new Weapon { AttackBuff = 10, Name = "Razor" } } };
         }
 
         if (iteration == 5)
         {
-            chest = new Chest { Items = new List<Item> { new Armor { HealthBuff = 10, Name = "HelmetOfUndying", ArmorType = ArmorType.Helmet } } };
+            chest = new Chest { Name = "Chest2", Items = new List<Item> { new Armor { HealthBuff = 10, Name = "HelmetOfUndying", ArmorType = ArmorType.Helmet } } };
+        }
+
+        if (chest != null)
+        {
+            chests.Add(chest);
         }
 
         return new Room
         {
-            Chest = chest,
+            Chests = chests,
             RoomName = $"Room{iteration}",
             MiddleDoorId = iteration,
             ReturnDoorId = iteration - 1,
