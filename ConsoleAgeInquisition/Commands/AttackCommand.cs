@@ -13,11 +13,6 @@ public class AttackCommand : ICommand
 
     public void Execute(string[] args)
     {
-        ////string target = args.Length > 0 ? args[0] : "unknown";
-        ////Console.WriteLine($"Attacking {target}...");
-
-        var currentRoom = _dungeon.Rooms.Find(room => room.Hero != null);
-
         if (args.Length == 0)
         {
             Console.WriteLine("Specify the enemy to attack.");
@@ -25,7 +20,7 @@ public class AttackCommand : ICommand
         }
 
         var enemyName = args[0];
-
+        var currentRoom = _dungeon.Rooms.Find(room => room.Hero != null);
         var enemy = currentRoom.Enemies.Find(e => e.Name == enemyName);
 
         if (enemy == null)
@@ -34,6 +29,11 @@ public class AttackCommand : ICommand
             return;
         }
 
+        AttackEnemy(enemy, currentRoom);
+    }
+
+    private static void AttackEnemy(Enemy enemy, Room currentRoom)
+    {
         // For now, for testing it is one hit kill for every enemy
         enemy.Health -= 1000;
         Console.WriteLine($"You attack {enemy.Name}!");
@@ -43,18 +43,14 @@ public class AttackCommand : ICommand
             Console.WriteLine($"{enemy.Name} is dead!");
             currentRoom.Enemies.Remove(enemy);
 
-            //TODO: do zastanowienia czy nie lepiej, żeby przeciwnik po zabiciu
-            //TODO: dropił skrzynie jedną z tymi rzeczami
-            //TODO: wtedy w komendzie look byłoby ładniej, bo po prostu byłyby skrzynie
-
-            // Droping enemy items on the floor
+            // Dropping enemy items on the floor
             var itemsDropped = 0;
             if (enemy.Weapon != null)
             {
                 currentRoom.ItemsOnTheFloor.Add(enemy.Weapon);
                 itemsDropped++;
             }
-            if (enemy.Items != null)
+            if (enemy.Items.Count > 0)
             {
                 currentRoom.ItemsOnTheFloor.AddRange(enemy.Items);
                 itemsDropped++;

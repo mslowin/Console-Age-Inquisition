@@ -2,7 +2,6 @@
 
 public enum ItemType
 {
-    None,
     Weapon,
     Armor,
     Food,

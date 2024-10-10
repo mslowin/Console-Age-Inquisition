@@ -20,8 +20,8 @@ public class RestartCommand : ICommand
         if (choice == 1)
         {
             // Save and restart
-            bool isSavingSucessfull = false;
-            while (!isSavingSucessfull)
+            bool isSavingSuccessful = false;
+            while (!isSavingSuccessful)
             {
                 Console.WriteLine("Type a name for the save.");
                 var saveName = Console.ReadLine();
@@ -31,7 +31,7 @@ public class RestartCommand : ICommand
                 }
                 else
                 {
-                    isSavingSucessfull = FilesService.SaveGame(_game, saveName);
+                    isSavingSuccessful = FilesService.SaveGame(_game, saveName);
                 }
             }
 

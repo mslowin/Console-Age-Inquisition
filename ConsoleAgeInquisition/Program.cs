@@ -29,23 +29,11 @@ namespace ConsoleAgeInquisition
 
             // Użytkownik zostanie powitany
             // Dostanie możliwość wyboru akcji, które będą wyświetlone w menu
-            //// a. bohater (dziedziczy po character + metody odpowiednie), przeciwnicy (dziedziczy po character + metody odpowiednie),
-            //// dodatkowe typy (barbarian, knight, golem, ghul itp.))
-            //// a. Stworzenie nowej gry
-            ////// a2. Podanie szczegółów takich jak poziom trudności, nazwa save'u
-            ////// a3. Akceptacja wyborów
-            //// b. Stworzenie swojej postaci
-            ////// b1. Przygotowanie menu tworzenia postaci
-            ////// b2. Imię bohatera, wybór klasy (opisy czym się harakteryzują), przypisanie początkowych zasobów takich jak życie, atak, mana
-            ////// b3. Akceptacja wyborów
+            ////// b2. wybór klasy (opisy czym się harakteryzują)
             //// c. Dodanie instrukcji takich jak atak, leczenie, przejście do innego pokoju (jako komendy w konsoli np. "/attack" lub "/move 1" (drzwi numer 1))
-            ////// c1. przygotowanie jakiegoś helpa, który wypisywałby i opisywał te wszystkie funkcjonalności "/help"
             //// d. Wygenerowanie pierwszego dungeonu, w nim pokoi, itemków, wrogów i bossa (na początek hardcodced)
-            ////// d1. Stworzenie odpowiednich klas
-            ////// d2. Rozpisanie jak pierwszy dungeon miałby wyglądać i zhardcodować pokoje, przejścia, miejsca przeciwników, miejsce bossa, loot
             ////// d3. Przetestować przechodzenie między pokojami
             //// e. Dodanie modelu walki
-            //// f. Zapisanie stanu gry (to później do jakiegoś pliku txt/json albo w bazie później)
         }
     }
 }

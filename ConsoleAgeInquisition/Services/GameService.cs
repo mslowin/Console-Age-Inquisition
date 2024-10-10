@@ -25,6 +25,8 @@ public static class GameService
             }
         }
 
+        // TODO: do przetestowania podnoszenie różnuch typów itemków za pomocą komendy pickup
+
         // TODO: po pokonaniu bossa koniec gry i jakiś tekst podsumowujący (A właściwie gra powinna się
         // TODO: kończyć w momencie kiedy w ekwipunku HEro znajdzie się np. diament, który wypada z bosa)
         // TODO: czyli co iteracja jest jakis if (HeroFoundDiamond)
@@ -36,6 +38,8 @@ public static class GameService
         // TODO: (komenda open, która wysypuje zawartość skrzyni na ziemie i usuwa skrzynie z pokoju)
 
         // TODO: nazwy objektów nigdy nie mogą się powtarzać wewnątrz jednego pokoju
+
+        // TODO: komenda w stylu USE -> np używasz jedzenia z ekwipunku, aby się uleczyć, albo potki
     }
 
     private static void Initialize(CommandService commandService, Game game)
