@@ -62,9 +62,9 @@ public class LookCommand : ICommand
 
         // Showing doors
         Console.WriteLine("\nDoors:");
-        if (currentRoom.MiddleDoorId.HasValue) Console.WriteLine($"- Middle door");
-        if (currentRoom.LeftDoorId.HasValue) Console.WriteLine($"- Left door");
-        if (currentRoom.RightDoorId.HasValue) Console.WriteLine($"- Right door");
-        if (currentRoom.ReturnDoorId.HasValue) Console.WriteLine($"- Return door");
+        if (currentRoom.NorthDoorId.HasValue) Console.WriteLine($"- North door");
+        if (currentRoom.WestDoorId.HasValue) Console.WriteLine($"- West door");
+        if (currentRoom.EastDoorId.HasValue) Console.WriteLine($"- East door");
+        if (currentRoom.SouthDoorId.HasValue) Console.WriteLine($"- South door");
     }
 }

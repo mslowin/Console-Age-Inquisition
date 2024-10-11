@@ -86,8 +86,8 @@ public static class EntitiesService
         {
             Chests = chests,
             RoomName = $"Room{iteration}",
-            MiddleDoorId = iteration,
-            ReturnDoorId = iteration - 1,
+            NorthDoorId = iteration,
+            SouthDoorId = iteration - 1 < 0 ? null : iteration - 1,
             Enemies = enemies,
             ItemsOnTheFloor = new List<Item>()
         };

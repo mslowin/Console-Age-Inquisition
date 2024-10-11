@@ -25,14 +25,11 @@ public static class GameService
             }
         }
 
-        // TODO: do przetestowania podnoszenie różnuch typów itemków za pomocą komendy pickup
+        // TODO: do przetestowania podnoszenie różnych typów itemków za pomocą komendy pickup
 
         // TODO: po pokonaniu bossa koniec gry i jakiś tekst podsumowujący (A właściwie gra powinna się
-        // TODO: kończyć w momencie kiedy w ekwipunku HEro znajdzie się np. diament, który wypada z bosa)
+        // TODO: kończyć w momencie kiedy w ekwipunku Hero znajdzie się np. diament, który wypada z bosa)
         // TODO: czyli co iteracja jest jakis if (HeroFoundDiamond)
-
-        // TODO: ważne, nie można przejść do następenego pokoju, jeśli w pokoju są przeciwnicy,
-        // TODO: można jedynie wrócić do poprzedniego (to do komendy go/move czy coś)
 
         // TODO: ważne, nie można otworzyć skrzyni, jeśli w pokoju są przeciwnicy
         // TODO: (komenda open, która wysypuje zawartość skrzyni na ziemie i usuwa skrzynie z pokoju)
@@ -45,6 +42,7 @@ public static class GameService
     private static void Initialize(CommandService commandService, Game game)
     {
         commandService.RegisterCommand("attack", new AttackCommand(game.Dungeon), "Attack a specified target. Usage: attack [target]");
+        commandService.RegisterCommand("go", new GoCommand(game.Dungeon), "Go in selected direction. Usage: go [direction] (north, south, east, west)");
         commandService.RegisterCommand("pickup", new PickUpCommand(game.Dungeon), "Pick up an item. Usage: pickup [item]");
         commandService.RegisterCommand("save", new SaveCommand(game), "Save current state of the game.");
         commandService.RegisterCommand("look", new LookCommand(game.Dungeon), "Get information about the current surroundings.");

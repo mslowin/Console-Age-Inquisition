@@ -6,13 +6,13 @@ public class Room
 
     public List<Enemy> Enemies;
 
-    public int? LeftDoorId;
+    public int? WestDoorId;
 
-    public int? MiddleDoorId;
+    public int? NorthDoorId;
 
-    public int? ReturnDoorId;
+    public int? SouthDoorId;
 
-    public int? RightDoorId;
+    public int? EastDoorId;
 
     public Hero? Hero;
 
