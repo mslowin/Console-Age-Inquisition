@@ -35,8 +35,9 @@ public class AttackCommand : ICommand
     private static void AttackEnemy(Enemy enemy, Room currentRoom)
     {
         // For now, for testing it is one hit kill for every enemy
-        enemy.Health -= 1000;
-        Console.WriteLine($"You attack {enemy.Name}!");
+        var damageDealt = currentRoom.Hero!.Attack;
+        enemy.Health -= damageDealt;
+        Console.WriteLine($"You attack {enemy.Name} and deal {damageDealt} damage!");
 
         if (enemy.Health <= 0)
         {
@@ -84,6 +85,13 @@ public class AttackCommand : ICommand
         else
         {
             Console.WriteLine($"{enemy.Name} has {enemy.Health} HP left.");
+
+            // Enemy attacks back
+            var damageDealtToHero = enemy.AttackHero();
+            currentRoom.Hero!.Health -= damageDealtToHero;
+            Console.WriteLine(damageDealtToHero > 0
+                ? $"{enemy.Name} attacks you and deals {damageDealtToHero} damage!"
+                : $"{enemy.Name} tries to attack you but misses!");
         }
     }
 }
