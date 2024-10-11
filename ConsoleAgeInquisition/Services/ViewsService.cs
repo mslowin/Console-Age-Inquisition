@@ -186,4 +186,61 @@ public static class ViewsService
                       "admiration of the fairest ladies! Your adventure begins now!\n\n");
         Console.Write("Type \"look\" to gather information about your surroundings or \"help\" to list all available commands");
     }
+
+    public static void VictoryMessage()
+    {
+        Console.WriteLine("\n\nWith the last of the lurking monsters slain, the dungeon falls silent.");
+        Console.WriteLine("Amid the scattered bones and broken weapons, you find a glimmering treasure — the legendary Diamond Ore.");
+        Console.WriteLine("\nYour quest is complete. You clutch the precious diamonds tightly, feeling their weight in your hands.");
+        Console.WriteLine("Visions of tavern cheers and the admiring gazes of ladies fill your mind.");
+        Console.WriteLine("\nVictory is yours! Now, with your hard-earned fortune, it's time to head back to town...");
+        Console.WriteLine("...and buy some beer for the ladies.");
+        Console.WriteLine("\n\nCongratulations, brave hero! You've conquered the dungeon and won glory!\n\n");
+        Console.WriteLine(@"
+ _________  ___  ___  _______           _______   ________   ________     
+|\___   ___\\  \|\  \|\  ___ \         |\  ___ \ |\   ___  \|\   ___ \    
+\|___ \  \_\ \  \\\  \ \   __/|        \ \   __/|\ \  \\ \  \ \  \_|\ \   
+     \ \  \ \ \   __  \ \  \_|/__       \ \  \_|/_\ \  \\ \  \ \  \ \\ \  
+      \ \  \ \ \  \ \  \ \  \_|\ \       \ \  \_|\ \ \  \\ \  \ \  \_\\ \ 
+       \ \__\ \ \__\ \__\ \_______\       \ \_______\ \__\\ \__\ \_______\
+        \|__|  \|__|\|__|\|_______|        \|_______|\|__| \|__|\|_______|
+            ");
+    }
+
+    public static void YouDiedMessage()
+    {
+        Console.WriteLine("\n");
+        Console.WriteLine(@"
+  ___    ___ ________  ___  ___          ________  ___  _______   ________     
+ |\  \  /  /|\   __  \|\  \|\  \        |\   ___ \|\  \|\  ___ \ |\   ___ \    
+ \ \  \/  / | \  \|\  \ \  \\\  \       \ \  \_|\ \ \  \ \   __/|\ \  \_|\ \   
+  \ \    / / \ \  \\\  \ \  \\\  \       \ \  \ \\ \ \  \ \  \_|/_\ \  \ \\ \  
+   \/  /  /   \ \  \\\  \ \  \\\  \       \ \  \_\\ \ \  \ \  \_|\ \ \  \_\\ \ 
+ __/  / /      \ \_______\ \_______\       \ \_______\ \__\ \_______\ \_______\
+|\___/ /        \|_______|\|_______|        \|_______|\|__|\|_______|\|_______|
+\|___|/                                                                        
+            ");
+    }
+
+    public static void GameNameMessage()
+    {
+        Console.WriteLine(@"
+ ________  ________  ________   ________  ________  ___       _______           ________  ________  _______
+|\   ____\|\   __  \|\   ___  \|\   ____\|\   __  \|\  \     |\  ___ \         |\   __  \|\   ____\|\  ___ \
+\ \  \___|\ \  \|\  \ \  \\ \  \ \  \___|\ \  \|\  \ \  \    \ \   __/|        \ \  \|\  \ \  \___|\ \   __/|
+ \ \  \    \ \  \\\  \ \  \\ \  \ \_____  \ \  \\\  \ \  \    \ \  \_|/__       \ \   __  \ \  \  __\ \  \_|/__
+  \ \  \____\ \  \\\  \ \  \\ \  \|____|\  \ \  \\\  \ \  \____\ \  \_|\ \       \ \  \ \  \ \  \|\  \ \  \_|\ \
+   \ \_______\ \_______\ \__\\ \__\____\_\  \ \_______\ \_______\ \_______\       \ \__\ \__\ \_______\ \_______\
+    \|_______|\|_______|\|__| \|__|\_________\|_______|\|_______|\|_______|        \|__|\|__|\|_______|\|_______|
+                                  \|_________|
+ ___  ________   ________  ___  ___  ___  ________  ___  _________  ___  ________  ________
+|\  \|\   ___  \|\   __  \|\  \|\  \|\  \|\   ____\|\  \|\___   ___\\  \|\   __  \|\   ___  \
+\ \  \ \  \\ \  \ \  \|\  \ \  \\\  \ \  \ \  \___|\ \  \|___ \  \_\ \  \ \  \|\  \ \  \\ \  \
+ \ \  \ \  \\ \  \ \  \\\  \ \  \\\  \ \  \ \_____  \ \  \   \ \  \ \ \  \ \  \\\  \ \  \\ \  \
+  \ \  \ \  \\ \  \ \  \\\  \ \  \\\  \ \  \|____|\  \ \  \   \ \  \ \ \  \ \  \\\  \ \  \\ \  \
+   \ \__\ \__\\ \__\ \_____  \ \_______\ \__\____\_\  \ \__\   \ \__\ \ \__\ \_______\ \__\\ \__\
+    \|__|\|__| \|__|\|___| \__\|_______|\|__|\_________\|__|    \|__|  \|__|\|_______|\|__| \|__|
+                          \|__|             \|_________|
+            ");
+    }
 }

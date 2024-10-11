@@ -14,6 +14,7 @@ public static class GameManagementService
     /// </summary>
     public static void Start()
     {
+        ViewsService.GameNameMessage();
         while (true)
         {
             var choice = ViewsService.HandleMainMenu();

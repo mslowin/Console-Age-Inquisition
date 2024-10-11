@@ -17,6 +17,28 @@ public static class GameService
 
         while (true)
         {
+            ////if (!game.Dungeon.Rooms.Exists(room => room.Enemies.Count > 0))
+            ////{
+            ////    // When the are no more enemies, the game ends
+            ////    break;
+            ////}
+
+            var hero = game.Dungeon.Rooms.Find(room => room.Hero != null)!.Hero;
+            var diamondOre = Resources.GetDiamondOre();
+            if (hero!.Items.Exists(item => item.Name == diamondOre.Name && item.Type == diamondOre.Type))
+            {
+                // When the hero picks up diamonds, the game ends
+                ViewsService.VictoryMessage();
+                break;
+            }
+
+            if (hero.Health <= 0)
+            {
+                // When the hero dies
+                ViewsService.YouDiedMessage();
+                break;
+            }
+
             Console.Write("\n> ");
             var input = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(input))
@@ -26,10 +48,6 @@ public static class GameService
         }
 
         // TODO: do przetestowania podnoszenie różnych typów itemków za pomocą komendy pickup
-
-        // TODO: po pokonaniu bossa koniec gry i jakiś tekst podsumowujący (A właściwie gra powinna się
-        // TODO: kończyć w momencie kiedy w ekwipunku Hero znajdzie się np. diament, który wypada z bosa)
-        // TODO: czyli co iteracja jest jakis if (HeroFoundDiamond)
 
         // TODO: ważne, nie można otworzyć skrzyni, jeśli w pokoju są przeciwnicy
         // TODO: (komenda open, która wysypuje zawartość skrzyni na ziemie i usuwa skrzynie z pokoju)

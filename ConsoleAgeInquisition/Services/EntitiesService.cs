@@ -127,7 +127,7 @@ public static class EntitiesService
                 new List<Item>
                 {
                     CreateItem(ItemType.PowerRing, "RingOfHappiness", 0, 5, 5),
-                    CreateItem(ItemType.QuestItem, "DiamondOre", 0, 0, 0)
+                    Resources.GetDiamondOre()
                 });
 
         return enemy;
