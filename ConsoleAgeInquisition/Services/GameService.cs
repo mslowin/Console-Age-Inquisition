@@ -41,15 +41,16 @@ public static class GameService
 
     private static void Initialize(CommandService commandService, Game game)
     {
+        commandService.RegisterCommand("look", new LookCommand(game.Dungeon), "Get information about the current surroundings.");
+        commandService.RegisterCommand("stats", new StatsCommand(game.Dungeon), "Get information about the Hero.");
         commandService.RegisterCommand("attack", new AttackCommand(game.Dungeon), "Attack a specified target. Usage: attack [target]");
         commandService.RegisterCommand("go", new GoCommand(game.Dungeon), "Go in selected direction. Usage: go [direction] (north, south, east, west)");
         commandService.RegisterCommand("pickup", new PickUpCommand(game.Dungeon), "Pick up an item. Usage: pickup [item]");
-        commandService.RegisterCommand("save", new SaveCommand(game), "Save current state of the game.");
-        commandService.RegisterCommand("look", new LookCommand(game.Dungeon), "Get information about the current surroundings.");
         commandService.RegisterCommand("examine", new ExamineCommand(game.Dungeon), "Get more information about an object or enemy. Usage: examine [object]");
-        commandService.RegisterCommand("help", new HelpCommand(commandService), "List all available commands.");
+        commandService.RegisterCommand("save", new SaveCommand(game), "Save current state of the game.");
         commandService.RegisterCommand("restart", new RestartCommand(game), "Restart the game with optional saving.");
         commandService.RegisterCommand("exit", new ExitCommand(game), "Exit the game with optional saving.");
+        commandService.RegisterCommand("help", new HelpCommand(commandService), "List all available commands.");
 
         // Potem reszta komend
     }
