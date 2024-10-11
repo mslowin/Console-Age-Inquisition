@@ -103,7 +103,8 @@ public static class GameManagementService
 
         hero.Items = new List<Item>();
 
-        hero.SetHealthAttackMana();
+        hero.SetHealthAttackManaByType();
+        hero.AdjustStatsByItems();
 
         return hero;
     }

@@ -109,6 +109,7 @@ public static class EntitiesService
                 {
                     CreateItem(ItemType.PowerRing, "RingOfPower", 0, 5, 0)
                 });
+            enemy.AdjustStatsByItems();
             enemies.Add(enemy);
         }
 
@@ -129,6 +130,7 @@ public static class EntitiesService
                     CreateItem(ItemType.PowerRing, "RingOfHappiness", 0, 5, 5),
                     Resources.GetDiamondOre()
                 });
+            enemy.AdjustStatsByItems();
 
         return enemy;
     }

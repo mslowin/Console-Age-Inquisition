@@ -29,10 +29,60 @@ public class Character
 
     public List<Item> Items; // Klasa Item
 
+    public void AdjustStatsByItems()
+    {
+        if (Weapon != null)
+        {
+            Health += Weapon.HealthBuff;
+            Attack += Weapon.AttackBuff;
+            Mana += Weapon.ManaBuff;
+        }
+
+        if (HeadArmor != null)
+        {
+            Health += HeadArmor.HealthBuff;
+            Attack += HeadArmor.AttackBuff;
+            Mana += HeadArmor.ManaBuff;
+        }
+
+        if (ChestArmor != null)
+        {
+            Health += ChestArmor.HealthBuff;
+            Attack += ChestArmor.AttackBuff;
+            Mana += ChestArmor.ManaBuff;
+        }
+
+        if (ArmsArmor != null)
+        {
+            Health += ArmsArmor.HealthBuff;
+            Attack += ArmsArmor.AttackBuff;
+            Mana += ArmsArmor.ManaBuff;
+        }
+
+        if (LegsArmor != null)
+        {
+            Health += LegsArmor.HealthBuff;
+            Attack += LegsArmor.AttackBuff;
+            Mana += LegsArmor.ManaBuff;
+        }
+
+        if (Items.Count <= 0)
+        {
+            return;
+        }
+
+        foreach (var item in Items.Where(item => item.Type == ItemType.PowerRing))
+        {
+            Health += item.HealthBuff;
+            Attack += item.AttackBuff;
+            Mana += item.ManaBuff;
+        }
+    }
+
     /// <summary>
     /// Sets characters health, attack and mana based on the character type
     /// </summary>
-    public void SetHealthAttackMana()
+    public void SetHealthAttackManaByType()
     {
         switch (Type)
         {
