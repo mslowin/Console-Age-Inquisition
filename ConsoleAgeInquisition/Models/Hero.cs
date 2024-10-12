@@ -222,4 +222,13 @@ public class Hero : Character
             return null;
         }
     }
+
+    public void UseObject(Item objectToBeUsed)
+    {
+        Health += objectToBeUsed.HealthBuff;
+        Attack += objectToBeUsed.AttackBuff;
+        Mana += objectToBeUsed.ManaBuff;
+
+        Items.Remove(objectToBeUsed);
+    }
 }

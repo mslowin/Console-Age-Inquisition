@@ -101,7 +101,11 @@ public static class GameManagementService
         var heroType = ViewsService.HandleHeroTypeMenu();
         hero.Type = (CharacterType)Enum.Parse(typeof(CharacterType), heroType);
 
-        hero.Items = new List<Item>();
+        hero.Items = new List<Item>
+        {
+            EntitiesService.CreateItem(ItemType.Food, "Bread", 0, 5, 0),
+            EntitiesService.CreateItem(ItemType.Food, "HealthPotion", 0, 15, 0),
+        };
 
         hero.SetHealthAttackManaByType();
         hero.AdjustStatsByItems();
