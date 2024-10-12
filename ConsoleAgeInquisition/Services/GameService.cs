@@ -48,9 +48,6 @@ public static class GameService
         }
 
         // TODO: do przetestowania podnoszenie różnych typów itemków za pomocą komendy pickup
-
-        // TODO: ważne, nie można otworzyć skrzyni, jeśli w pokoju są przeciwnicy
-        // TODO: (komenda open, która wysypuje zawartość skrzyni na ziemie i usuwa skrzynie z pokoju)
     }
 
     private static void Initialize(CommandService commandService, Game game)
@@ -60,6 +57,7 @@ public static class GameService
         commandService.RegisterCommand("attack", new AttackCommand(game.Dungeon), "Attack a specified target. Usage: attack [target]");
         commandService.RegisterCommand("use", new UseCommand(game.Dungeon), "Use an object. Usage: use [object] (food, potions)");
         commandService.RegisterCommand("go", new GoCommand(game.Dungeon), "Go in selected direction. Usage: go [direction] (north, south, east, west)");
+        commandService.RegisterCommand("open", new OpenCommand(game.Dungeon), "Open selected chest. Usage: open [chest]");
         commandService.RegisterCommand("pickup", new PickUpCommand(game.Dungeon), "Pick up an item. Usage: pickup [item]");
         commandService.RegisterCommand("examine", new ExamineCommand(game.Dungeon), "Get more information about an object or enemy. Usage: examine [object]");
         commandService.RegisterCommand("save", new SaveCommand(game), "Save current state of the game.");

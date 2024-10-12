@@ -104,7 +104,7 @@ public static class GameManagementService
         hero.Items = new List<Item>
         {
             EntitiesService.CreateItem(ItemType.Food, "Bread", 0, 5, 0),
-            EntitiesService.CreateItem(ItemType.Food, "HealthPotion", 0, 15, 0),
+            EntitiesService.CreateItem(ItemType.Potion, "HealthPotion", 0, 15, 0),
         };
 
         hero.SetHealthAttackManaByType();

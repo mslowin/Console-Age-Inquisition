@@ -90,7 +90,7 @@ public class AttackCommand : ICommand
             var damageDealtToHero = enemy.AttackHero();
             currentRoom.Hero!.Health -= damageDealtToHero;
             Console.WriteLine(damageDealtToHero > 0
-                ? $"{enemy.Name} attacks you and deals {damageDealtToHero} damage!"
+                ? $"{enemy.Name} attacks you and deals {damageDealtToHero} damage! You have {currentRoom.Hero!.Health} HP left."
                 : $"{enemy.Name} tries to attack you but misses!");
         }
     }
