@@ -17,7 +17,7 @@ public class CommandService
     public void ExecuteCommand(string input)
     {
         string[] parts = input.Split(' ', 2);
-        string commandName = parts[0];
+        string commandName = parts[0].ToLower();
         string[] args = parts.Length > 1 ? parts[1].Split(' ') : Array.Empty<string>();
 
         if (_commands.ContainsKey(commandName))

@@ -1,4 +1,6 @@
 ﻿using ConsoleAgeInquisition.Enums;
+using ConsoleAgeInquisition.Models;
+using Newtonsoft.Json;
 
 namespace ConsoleAgeInquisition.Services;
 
@@ -155,7 +157,17 @@ public static class ViewsService
         Console.WriteLine("Select save to be loaded:");
         foreach (var save in saveFiles)
         {
-            Console.WriteLine($"{index}. {Path.GetFileName(save)}");
+            // TODO: ta metoda zamiast indeksu mogłaby już zwracać w sumie obiekt Game
+            var jsonData = File.ReadAllText(save);
+            Game? game =  JsonConvert.DeserializeObject<Game>(jsonData);
+
+            if (game != null)
+            {
+                var hero = game.Dungeon.Rooms.Single(x => x.Hero != null).Hero;
+                Console.WriteLine($"{index}. {Path.GetFileName(save)} ({game!.DifficultyLevel})");
+                Console.WriteLine($"    - current room: {game.Dungeon.Rooms.Single(x => x.Hero != null).RoomName}");
+                Console.WriteLine($"    - Hero: {hero!.Name}, {hero!.Type} (HP: {hero!.Health}, ATT: {hero!.Attack}, MANA: {hero!.Mana})");
+            }
             index++;
         }
 
