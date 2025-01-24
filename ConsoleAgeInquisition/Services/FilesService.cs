@@ -17,6 +17,7 @@ public static class FilesService
         if (!IsSaveNameValid(saveName))
         {
             Console.WriteLine("Invalid save name. The name needs to contain only letters and numbers (must start with a letter)");
+            return false;
         }
 
         var gameSavesFolderPath = Resources.GetGameSavesFolderPath();

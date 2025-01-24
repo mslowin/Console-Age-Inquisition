@@ -151,6 +151,9 @@ public static class EntitiesService
             rooms.Add(room);
         }
 
+        // Last room should not have a north door
+        rooms.Last().NorthDoorId = null;
+
         return rooms;
     }
 }
