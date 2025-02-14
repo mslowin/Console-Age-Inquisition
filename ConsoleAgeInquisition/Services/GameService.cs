@@ -50,7 +50,7 @@ public static class GameService
         // TODO: do przetestowania podnoszenie różnych typów itemków za pomocą komendy pickup
     }
 
-    private static void Initialize(CommandService commandService, Game game)
+    public static void Initialize(CommandService commandService, Game game)
     {
         commandService.RegisterCommand("look", new LookCommand(game.Dungeon), "Get information about the current surroundings.");
         commandService.RegisterCommand("stats", new StatsCommand(game.Dungeon), "Get information about the Hero.");

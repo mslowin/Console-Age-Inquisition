@@ -14,6 +14,11 @@ public class CommandService
         _commands[name] = (command, description);
     }
 
+    public bool IsCommandRegistered(string name)
+    {
+        return _commands.ContainsKey(name);
+    }
+
     public void ExecuteCommand(string input)
     {
         string[] parts = input.Split(' ', 2);
