@@ -24,31 +24,28 @@ public class ExamineCommand : ICommand
 
         var objectName = args[0];
 
-        var enemy = currentRoom.Enemies.Find(e => e.Name == objectName);
+        var enemy = currentRoom?.Enemies?.Find(e => e.Name == objectName);
         if (enemy != null)
         {
             ExamineEnemy(enemy);
             return;
         }
 
-        var itemOnTheFloor = currentRoom.ItemsOnTheFloor.Find(e => e.Name == objectName);
+        var itemOnTheFloor = currentRoom?.ItemsOnTheFloor?.Find(e => e.Name == objectName);
         if (itemOnTheFloor != null)
         {
             ExamineItemOnTheFloor(itemOnTheFloor);
             return;
         }
 
-        var chest = currentRoom.Chests.Find(e => e.Name == objectName);
+        var chest = currentRoom?.Chests?.Find(e => e.Name == objectName);
         if (chest != null)
         {
             ExamineChest(chest);
             return;
         }
-
-        if (enemy == null && itemOnTheFloor == null && chest == null)
-        {
-            Console.WriteLine("No such object to examine.");
-        }
+        
+        Console.WriteLine("No such object to examine.");
     }
 
     private static void ExamineEnemy(Enemy enemy)
@@ -82,7 +79,7 @@ public class ExamineCommand : ICommand
             Console.WriteLine($"        + Legs armor: {enemy.LegsArmor} (HP buff: {enemy.LegsArmor.HealthBuff})");
         }
 
-        if (enemy.Items.Count > 0)
+        if (enemy.Items != null && enemy.Items.Count > 0)
         {
             Console.WriteLine("    * Items:");
             foreach (var item in enemy.Items)

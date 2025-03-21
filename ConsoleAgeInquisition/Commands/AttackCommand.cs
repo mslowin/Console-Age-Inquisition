@@ -51,7 +51,7 @@ public class AttackCommand : ICommand
                 currentRoom.ItemsOnTheFloor.Add(enemy.Weapon);
                 itemsDropped++;
             }
-            if (enemy.Items.Count > 0)
+            if (enemy.Items != null && enemy.Items.Count > 0)
             {
                 currentRoom.ItemsOnTheFloor.AddRange(enemy.Items);
                 itemsDropped++;

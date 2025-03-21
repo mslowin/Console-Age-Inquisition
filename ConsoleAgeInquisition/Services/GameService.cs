@@ -25,14 +25,16 @@ public static class GameService
 
             var hero = game.Dungeon.Rooms.Find(room => room.Hero != null)!.Hero;
             var diamondOre = Resources.GetDiamondOre();
-            if (hero!.Items.Exists(item => item.Name == diamondOre.Name && item.Type == diamondOre.Type))
+            if (hero != null
+                && hero.Items != null
+                && hero.Items.Exists(item => item.Name == diamondOre.Name && item.Type == diamondOre.Type))
             {
                 // When the hero picks up diamonds, the game ends
                 ViewsService.VictoryMessage();
                 break;
             }
 
-            if (hero.Health <= 0)
+            if (hero != null && hero.Health <= 0)
             {
                 // When the hero dies
                 ViewsService.YouDiedMessage();

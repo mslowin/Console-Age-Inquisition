@@ -6,7 +6,7 @@ public class Enemy : Character
     /// Method to attack the hero
     /// </summary>
     /// <returns>Amount of HP hero should loose.</returns>
-    public int AttackHero()
+    public virtual int AttackHero()
     {
         var random = new Random();
         var randomNumber = random.Next(1, 11);

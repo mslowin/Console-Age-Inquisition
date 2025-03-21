@@ -19,7 +19,7 @@ public class LookCommand : ICommand
         Console.WriteLine($"You are now in: {currentRoom.RoomName}\n");
 
         // Showing enemies
-        if (currentRoom.Enemies.Count > 0)
+        if (currentRoom.Enemies != null && currentRoom.Enemies.Count > 0)
         {
             Console.WriteLine("Enemies in the room:");
             foreach (var enemy in currentRoom.Enemies)
@@ -33,7 +33,7 @@ public class LookCommand : ICommand
         }
 
         // Showing chests
-        if (currentRoom.Chests.Count > 0)
+        if (currentRoom.Chests != null && currentRoom.Chests.Count > 0)
         {
             Console.WriteLine("\nChests in the room:");
             foreach (var item in currentRoom.Chests)
@@ -47,7 +47,7 @@ public class LookCommand : ICommand
         }
 
         // Showing items on the floor
-        if (currentRoom.ItemsOnTheFloor.Count > 0)
+        if (currentRoom.ItemsOnTheFloor != null && currentRoom.ItemsOnTheFloor.Count > 0)
         {
             Console.WriteLine("\nItems on the floor:");
             foreach (var item in currentRoom.ItemsOnTheFloor)
