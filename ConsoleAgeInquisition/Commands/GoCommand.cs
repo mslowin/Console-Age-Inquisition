@@ -23,7 +23,7 @@ public class GoCommand : ICommand
         var currentRoom = _dungeon.Rooms.Find(room => room.Hero != null);
         var nextRoom = new Room();
 
-        if (currentRoom.Enemies.Count > 0)
+        if (currentRoom != null && currentRoom.Enemies != null && currentRoom.Enemies.Count > 0)
         {
             Console.WriteLine("You can't go to another room if there are enemies around.");
             return;
