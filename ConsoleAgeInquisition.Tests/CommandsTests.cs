@@ -7,7 +7,7 @@ using ConsoleAgeInquisition.Enums;
 
 namespace ConsoleAgeInquisition.Tests
 {
-    public class UnitTest1
+    public class CommandsTests
     {
 
         #region Common
