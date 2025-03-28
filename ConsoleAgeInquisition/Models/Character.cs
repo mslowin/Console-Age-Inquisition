@@ -17,7 +17,7 @@ public class Character
 
     public CharacterType Type;
 
-    public Armor? HeadArmor; // kasa armor, z property typu ArmorType.Head albo ArmorType.Legs
+    public Armor? HeadArmor;
 
     public Armor? ChestArmor;
 
@@ -27,7 +27,7 @@ public class Character
 
     public Weapon? Weapon;
 
-    public List<Item> Items; // Klasa Item
+    public List<Item> Items = new();
 
     public void AdjustStatsByItems()
     {

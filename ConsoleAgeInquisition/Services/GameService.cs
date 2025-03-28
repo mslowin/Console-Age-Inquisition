@@ -25,14 +25,16 @@ public static class GameService
 
             var hero = game.Dungeon.Rooms.Find(room => room.Hero != null)!.Hero;
             var diamondOre = Resources.GetDiamondOre();
-            if (hero!.Items.Exists(item => item.Name == diamondOre.Name && item.Type == diamondOre.Type))
+            if (hero != null
+                && hero.Items != null
+                && hero.Items.Exists(item => item.Name == diamondOre.Name && item.Type == diamondOre.Type))
             {
                 // When the hero picks up diamonds, the game ends
                 ViewsService.VictoryMessage();
                 break;
             }
 
-            if (hero.Health <= 0)
+            if (hero != null && hero.Health <= 0)
             {
                 // When the hero dies
                 ViewsService.YouDiedMessage();
@@ -43,6 +45,15 @@ public static class GameService
             var input = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(input))
             {
+                // Get the height of the console window
+                int windowHeight = Console.WindowHeight;
+
+                // Add empty lines to push previous output up
+                for (int i = 0; i < windowHeight; i++)
+                {
+                    Console.WriteLine();
+                }
+
                 commandService.ExecuteCommand(input);
             }
         }
