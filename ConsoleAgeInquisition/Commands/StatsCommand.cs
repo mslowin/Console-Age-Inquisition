@@ -14,7 +14,7 @@ public class StatsCommand : ICommand
     public void Execute(string[] args)
     {
         var currentRoom = _dungeon.Rooms.Find(room => room.Hero != null);
-        var hero = currentRoom.Hero;
+        var hero = currentRoom?.Hero;
 
         if (hero == null)
         {
@@ -50,19 +50,19 @@ public class StatsCommand : ICommand
 
         if (hero.HeadArmor != null)
         {
-            Console.WriteLine($"        + Head armor: {hero.HeadArmor} (HP buff: {hero.HeadArmor.HealthBuff})");
+            Console.WriteLine($"        + Head armor: {hero.HeadArmor.Name} (HP buff: {hero.HeadArmor.HealthBuff})");
         }
         if (hero.ChestArmor != null)
         {
-            Console.WriteLine($"        + Chest armor: {hero.ChestArmor} (HP buff: {hero.ChestArmor.HealthBuff})");
+            Console.WriteLine($"        + Chest armor: {hero.ChestArmor.Name} (HP buff: {hero.ChestArmor.HealthBuff})");
         }
         if (hero.ArmsArmor != null)
         {
-            Console.WriteLine($"        + Arms armor: {hero.ArmsArmor} (HP buff: {hero.ArmsArmor.HealthBuff})");
+            Console.WriteLine($"        + Arms armor: {hero.ArmsArmor.Name} (HP buff: {hero.ArmsArmor.HealthBuff})");
         }
         if (hero.LegsArmor != null)
         {
-            Console.WriteLine($"        + Legs armor: {hero.LegsArmor} (HP buff: {hero.LegsArmor.HealthBuff})");
+            Console.WriteLine($"        + Legs armor: {hero.LegsArmor.Name} (HP buff: {hero.LegsArmor.HealthBuff})");
         }
 
         if (hero.Items.Count > 0)

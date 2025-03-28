@@ -45,6 +45,15 @@ public static class GameService
             var input = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(input))
             {
+                // Get the height of the console window
+                int windowHeight = Console.WindowHeight;
+
+                // Add empty lines to push previous output up
+                for (int i = 0; i < windowHeight; i++)
+                {
+                    Console.WriteLine();
+                }
+
                 commandService.ExecuteCommand(input);
             }
         }

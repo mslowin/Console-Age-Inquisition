@@ -4,7 +4,7 @@ public class Room
 {
     public string RoomName;
 
-    public List<Enemy> Enemies;
+    public List<Enemy> Enemies = new();
 
     public int? WestDoorId;
 
@@ -16,7 +16,7 @@ public class Room
 
     public Hero? Hero;
 
-    public List<Chest> Chests;
+    public List<Chest> Chests = new();
 
-    public List<Item> ItemsOnTheFloor;
+    public List<Item> ItemsOnTheFloor = new();
 }
